@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gino_wanandroid/common/sp_utils.dart';
@@ -7,6 +8,7 @@ import 'package:gino_wanandroid/provider/theme_provider.dart';
 import 'package:gino_wanandroid/res/colors.dart';
 import 'package:gino_wanandroid/res/gino_string.dart';
 
+import 'common/net_api.dart';
 import 'pages/home_pages.dart';
 import 'pages/navi_pages.dart';
 import 'pages/tree_pages.dart';
@@ -19,6 +21,10 @@ void main() async {
   var theme = ThemeProvider();
   var favorite = FavoriteProvider();
 
+  // var dio = Dio();
+  // var bannerResponse = await dio.get(NewApi.BASE_URL+NewApi.BANNER);
+  // print(bannerResponse.statusCode);
+  // print(bannerResponse.data);
   //sp中获取主题
   int? themeIndex = await SPUils.getInstance.getInt("themeindex");
   // int? themeIndex = 1;
@@ -38,6 +44,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+
     var theme;
     return   MaterialApp(
       title: GinoStr.appName,

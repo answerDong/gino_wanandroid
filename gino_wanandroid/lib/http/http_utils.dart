@@ -2,19 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:gino_wanandroid/common/net_api.dart';
+import 'package:gino_wanandroid/common/toast_utils.dart';
 
 class HttpUitls {
-  static late HttpUitls instance;
 
+  static HttpUitls instance = HttpUitls();
   late Dio dio;
-
+  late BaseOptions options;
   static HttpUitls getInstance() {
-    instance ??= HttpUitls();
     return instance;
   }
 
   HttpUitls() {
-    final options = BaseOptions(
+        options = BaseOptions(
         //配置base地址
         baseUrl: NewApi.BASE_URL,
         connectTimeout: const Duration(seconds: 5),
@@ -25,27 +25,27 @@ class HttpUitls {
 
     //添加配置  cookies管理  拦截器
     dio = Dio(options);
-    final cookieJar = CookieJar();
-    dio.interceptors.add(CookieManager(cookieJar));
-    dio.interceptors.add(InterceptorsWrapper(onRequest: (
-      options,
-      handler,
-    ) {
-      print("http onRequest ${options.data}");
-    }, onResponse: (e, handler) {
-      print("http response ${e.statusCode}");
-    }, onError: (e, handler) {
-      print("http onError ${e.error}");
-    }));
+    // dio.interceptors.add(CookieManager(CookieJar()));
+    // dio.interceptors.add(InterceptorsWrapper(onRequest: (
+    //   options,
+    //   handler,
+    // ) {
+    //   print("http onRequest ${options.data}");
+    //   print("http onRequest ${options.data}");
+    // }, onResponse: (e, handler) {
+    //   print("http response ${e.data}");
+    //   print("http response ${e.statusCode}");
+    // }, onError: (e, handler) {
+    //   print("http onError ${e.error}");
+    // }));
   }
 
   /// get请求
-  get(url, {data, options, cancelToken}) async {
+   get(url) async {
     Response? response;
     try {
-      response = await dio.get(url,
-          queryParameters: data, options: options, cancelToken: cancelToken);
-      print('get------------${response.data}');
+      response = await dio.get(url);
+      // print(response.data.toString());
     } on DioError catch (e) {
       print('get error------------$e');
       formatError(e);
