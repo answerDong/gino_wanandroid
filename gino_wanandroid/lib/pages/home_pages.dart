@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:card_swiper/card_swiper.dart';
-import 'package:dio/dio.dart';
 import 'package:easy_refresh/easy_refresh.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:gino_wanandroid/entity/article_entity.dart';
 import '../common/net_api.dart';
 import '../entity/banner_entity.dart';
@@ -136,7 +134,6 @@ class _HomePageState extends State<HomePage> {
         viewportFraction: 0.8,
         //两侧item的缩放比
         scale: 0.9,
-
         onTap: (int index) {
           //点击事件，返回下标
           print("index-----" + index.toString());
