@@ -51,6 +51,12 @@ dependencies:
   easy_refresh: ^3.3.1
   #https://pub.dev/packages/card_swiper/install banner控件
   card_swiper: ^2.0.4
+  #https://pub.dev/packages/share_plus/install
+  share_plus: ^6.3.1
+  #https://pub.dev/packages/webview_flutter/install
+  webview_flutter: ^4.0.6
+  webview_flutter_web: ^0.2.2+1
+  webview_flutter_platform_interface: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +79,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - lib/res/images/ic_logo.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

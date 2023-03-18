@@ -1,0 +1,195 @@
+// import 'dart:convert';
+// import 'package:easy_refresh/easy_refresh.dart';
+// import 'package:flutter/material.dart';
+// import 'package:gino_wanandroid/common/net_api.dart';
+// import 'package:gino_wanandroid/common/toast_utils.dart';
+// import 'package:gino_wanandroid/http/http_utils.dart';
+//
+// import 'articledetail_pages.dart';
+//
+// class CollectPage extends StatefulWidget {
+//   const CollectPage({super.key});
+//
+//   @override
+//   State<StatefulWidget> createState() {
+//     return _CollectPagePageState();
+//   }
+// }
+//
+// class _CollectPagePageState extends State<CollectPage> {
+//   List<ArticleDataData> articleDatas = [];
+//   int _page = 0;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     getHttp();
+//   }
+//
+//   void getHttp() async {
+//     try {
+//       var response = await HttpUitls.getInstance()
+//           .get("${NewApi.COLLECT_LIST}$_page/json");
+//       // Map map = json.decode(response.toString());
+//       // var articleEntity = ArticleEntity.fromJson(map);
+//       //
+//       // if (articleEntity.errorCode == -1001) {
+//       //   ToastUtils.show(msg: articleEntity.errorMsg);
+//       //   // Navigator.push(
+//       //   //   context,
+//       //   //   MaterialPageRoute(builder: (context) => LoginPage()),
+//       //   // );
+//       // } else {
+//       //   setState(() {
+//       //     articleDatas = articleEntity.data.datas;
+//       //   });
+//       // }
+//     } catch (e) {
+//       print(e);
+//     }
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text("我的收藏",textDirection: TextDirection.rtl,),
+//       ),
+//       body: EasyRefresh(
+//         header: const ClassicHeader(),
+//         footer: const ClassicFooter(),
+//         onRefresh: () async {
+//           await Future.delayed(const Duration(seconds: 1), () {
+//             setState(() {
+//               _page = 0;
+//             });
+//             getHttp();
+//           });
+//         },
+//         onLoad: () async {
+//           await Future.delayed(const Duration(seconds: 1), () async {
+//             setState(() {
+//               _page++;
+//             });
+//             // getMoreData();
+//           });
+//         },
+//         child: CustomScrollView(
+//           scrollDirection: Axis.vertical,
+//           slivers: [
+//             SliverList(
+//                 delegate: SliverChildBuilderDelegate(
+//               (context, index) {
+//                 return getItem(index);
+//               },
+//               childCount: articleDatas.length,
+//             ))
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+//
+//   Widget getItem(int index) {
+//     final item = articleDatas[index];
+//     return Dismissible(
+//       // Show a red background as the item is swiped away
+//       background: Container(color: Theme.of(context).primaryColor),
+//       // Each Dismissible must contain a Key. Keys allow Flutter to
+//       // uniquely identify Widgets.
+//       key: Key(item.title),
+//       // We also need to provide a function that will tell our app
+//       // what to do after an item has been swiped away.
+//       onDismissed: (direction) {
+//         // Remove the item from our data source
+//         articleDatas.removeAt(index);
+//
+//         // cancelCollect(item.id, item.originId == null ? -1 : item.originId);
+//
+//         // Show a snackbar! This snackbar could also contain "Undo" actions.
+//         ScaffoldMessenger.of(context)
+//             .showSnackBar(SnackBar(content: Text("已移除")));
+//       },
+//       child: getRow(index),
+//     );
+//   }
+//
+//   Widget getRow(int i) {
+//     return GestureDetector(
+//       child: Container(
+//           padding: EdgeInsets.all(10.0),
+//           child: ListTile(
+//             title: Text(
+//               articleDatas[i].title,
+//               maxLines: 2,
+//               overflow: TextOverflow.ellipsis,
+//             ),
+//             subtitle: Padding(
+//               padding: EdgeInsets.only(top: 10.0),
+//               child: Row(
+//                 children: <Widget>[
+//                   Container(
+//                     padding: EdgeInsets.symmetric(horizontal: 6),
+//                     decoration: BoxDecoration(
+//                       border: Border.all(
+//                         color: Theme.of(context).primaryColor,
+//                         width: 1.0,
+//                       ),
+//                       borderRadius: BorderRadius.circular((20.0)), // 圆角度
+//                     ),
+//                     child: Text(
+//                       articleDatas[i].chapterName,
+//                       style: TextStyle(color: Theme.of(context).primaryColor),
+//                     ),
+//                   ),
+//                   Container(
+//                     margin: EdgeInsets.only(left: 15),
+//                     child: Text(articleDatas[i].author),
+//                   ),
+//                 ],
+//               ),
+//             ),
+//             trailing: Icon(Icons.chevron_right),
+//           )),
+//       onTap: () {
+//         Navigator.push(
+//           context,
+//           MaterialPageRoute(
+//             builder: (context) => ArticleDetail(
+//               title: articleDatas[i].title,
+//               url: articleDatas[i].link,
+//             ),
+//           ),
+//         );
+//       },
+//     );
+//   }
+//
+//   @override
+//   void dispose() {
+//     super.dispose();
+//   }
+//
+//   // Future cancelCollect(int id, int originId) async {
+//   //   var data = {'originId': originId};
+//   //   var collectResponse = await HttpUitls.getInstance()
+//   //       .post('${NewApi.UN_COLLECT}$id/json', data: data);
+//   //   Map map = json.decode(collectResponse.toString());
+//   //   var entity = CommonEntity.fromJson(map);
+//   //   if (entity.errorCode == -1001) {
+//   //     ToastUtils.show(msg: entity.errorMsg);
+//   //   } else {
+//   //     //getHttp();
+//   //   }
+//   // }
+//   //
+//   // Future getMoreData() async {
+//   //   var response =
+//   //       await HttpUitls.getInstance().get("${NewApi.COLLECT_LIST}$_page/json");
+//   //   Map map = json.decode(response.toString());
+//   //   var articleEntity = ArticleEntity.fromJson(map);
+//   //   setState(() {
+//   //     articleDatas.addAll(articleEntity.data.datas);
+//   //   });
+//   // }
+// }

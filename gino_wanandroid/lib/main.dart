@@ -2,13 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gino_wanandroid/common/sp_utils.dart';
+import 'package:gino_wanandroid/http/http_utils.dart';
 import 'package:gino_wanandroid/pages/project_pages.dart';
 import 'package:gino_wanandroid/provider/favorite_provider.dart';
 import 'package:gino_wanandroid/provider/theme_provider.dart';
 import 'package:gino_wanandroid/res/colors.dart';
 import 'package:gino_wanandroid/res/gino_string.dart';
+import 'package:share_plus/share_plus.dart';
 
 import 'common/net_api.dart';
+import 'pages/about_pages.dart';
+import 'pages/articledetail_pages.dart';
 import 'pages/home_pages.dart';
 import 'pages/navi_pages.dart';
 import 'pages/tree_pages.dart';
@@ -20,11 +24,6 @@ void main() async {
   //初始化
   var theme = ThemeProvider();
   var favorite = FavoriteProvider();
-
-  // var dio = Dio();
-  // var bannerResponse = await dio.get(NewApi.BASE_URL+NewApi.BANNER);
-  // print(bannerResponse.statusCode);
-  // print(bannerResponse.data);
   //sp中获取主题
   int? themeIndex = await SPUils.getInstance.getInt("themeindex");
   // int? themeIndex = 1;
@@ -118,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: '点击选中最后一个',
         child: const Icon(Icons.add, color: Colors.white),
       ),
-      // drawer: showDrawer(),
+      drawer: showDrawer(),
     );
   }
 
@@ -142,6 +141,122 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
       }
     });
+  }
+
+  Widget showDrawer() {
+    return Drawer(
+      child: ListView(
+        //ListView padding 不为空的时候，Drawer顶部的状态栏就不会有灰色背景
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            //头像
+            currentAccountPicture: GestureDetector(
+              //圆形头像
+              child: ClipOval(
+                child: Image.network(
+                    'https://avatar.csdnimg.cn/C/0/1/1_yechaoa.jpg'),
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AboutPage()),
+                );
+              },
+            ),
+            //其他头像
+            otherAccountsPictures: <Widget>[
+              IconButton(
+                  icon: Icon(
+                    Icons.stars,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ArticleDetail(
+                            title: "点个star",
+                            url:
+                            "https://github.com/yechaoa/wanandroid_flutter"),
+                      ),
+                    );
+                  })
+            ],
+            accountName: Text(
+              GinoStr.proName,
+              textDirection: TextDirection.rtl,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
+            accountEmail: Text(GinoStr.github),
+          ),
+
+          ///功能列表
+          ListTile(
+            leading: Icon(Icons.favorite_border),
+            title: Text("我的收藏"),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () async {
+              // var response = await HttpUitls.getInstance()
+              //     .get("${NewApi.COLLECT_LIST}0/json");
+              // print("收藏数据"+response);
+              // Navigator.of(context).pop();
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => CollectPage()),
+              // );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.color_lens),
+            title: Text("切换主题"),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () {
+              Navigator.of(context).pop();
+              showThemeDialog();
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.share),
+            title: Text("我要分享"),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () {
+              Navigator.of(context).pop();
+              Share.share(
+                  '【玩安卓Flutter版】\nhttps://github.com/yechaoa/wanandroid_flutter');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.info_outline),
+            title: Text("关于项目"),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () {
+              //先关闭再跳转
+              Navigator.of(context).pop();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutPage()),
+              );
+            },
+          ),
+
+          Divider(),
+
+          ListTile(
+            leading: Icon(Icons.block),
+            title: Text("退出"),
+            trailing: Icon(Icons.chevron_right),
+            onTap: () {
+              //关闭drawer
+              Navigator.of(context).pop();
+              showLogoutDialog();
+            },
+          ),
+        ],
+      ),
+    );
   }
 
   Widget myBottomNavigatiorBar() {
@@ -193,6 +308,92 @@ class _MyHomePageState extends State<MyHomePage> {
       fontSize: 16.0,
     );
     _onItemTapped(3);
+  }
+
+  ///退出弹框
+  void showLogoutDialog() {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('提示'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('确认退出吗？'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text('取消', textDirection: TextDirection.rtl,style: TextStyle(color: GinoColors.primaryText)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              child: const Text('确定',textDirection: TextDirection.rtl,),
+              onPressed: () {
+                //退出
+                HttpUitls.getInstance().get(NewApi.LOGOUT);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  ///主题dialog
+  void showThemeDialog() {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('切换主题'),
+          content: SingleChildScrollView(
+            child: Container(
+              //包含ListView要指定宽高
+              width: MediaQuery.of(context).size.width * 0.9,
+              height: MediaQuery.of(context).size.height * 0.5,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: GinoColors.themeColor.keys.length,
+                itemBuilder: (BuildContext context, int position) {
+                  return GestureDetector(
+                    child: Container(
+                      padding: const EdgeInsets.all(20.0),
+                      margin: const EdgeInsets.only(bottom: 15),
+                      color: GinoColors.themeColor[position]["primaryColor"],
+                    ),
+                    onTap: () async {
+                      // Provide.value<ThemeProvide>(context).setTheme(position);
+                      // //存储主题下标
+                      // SharedPreferences sp =
+                      //     await SharedPreferences.getInstance();
+                      // sp.setInt("themeIndex", position);
+                      // Navigator.of(context).pop();
+                    },
+                  );
+                },
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: Text('关闭',
+                  style: TextStyle(color: Theme.of(context).primaryColor)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
 

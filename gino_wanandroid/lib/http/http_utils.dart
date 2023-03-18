@@ -41,10 +41,11 @@ class HttpUitls {
   }
 
   /// get请求
-   get(url) async {
+   get(url, {data, options, cancelToken}) async {
     Response? response;
     try {
-      response = await dio.get(url);
+      response = await dio.get(url,
+          queryParameters: data, options: options, cancelToken: cancelToken);
       // print(response.data.toString());
     } on DioError catch (e) {
       print('get error------------$e');
