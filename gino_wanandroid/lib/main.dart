@@ -155,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
               //圆形头像
               child: ClipOval(
                 child: Image.network(
-                    'https://avatar.csdnimg.cn/C/0/1/1_yechaoa.jpg'),
+                    'https://p3-passport.byteimg.com/img/user-avatar/e197bee8fce9515962b5e19874c70ce4~100x100.awebp'),
               ),
               onTap: () {
                 Navigator.of(context).pop();
@@ -168,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
             //其他头像
             otherAccountsPictures: <Widget>[
               IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.stars,
                     color: Colors.white,
                   ),
@@ -180,7 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) => ArticleDetail(
                             title: "点个star",
                             url:
-                            "https://github.com/yechaoa/wanandroid_flutter"),
+                            "https://github.com/answerDong/gino_wanandroid"),
                       ),
                     );
                   })

@@ -55,7 +55,7 @@ dependencies:
   share_plus: ^6.3.1
   #https://pub.dev/packages/webview_flutter/install
   webview_flutter: ^4.0.6
-  webview_flutter_web: ^0.2.2+1
+#  webview_flutter_web: ^0.2.2+1
   webview_flutter_platform_interface: ^2.0.0
 
 dev_dependencies:
@@ -82,6 +82,7 @@ flutter:
 
   assets:
     - lib/res/images/ic_logo.png
+    - lib/res/images/jsy01.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:gino_wanandroid/common/toast_utils.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_web/webview_flutter_web.dart';
 import 'articledetail_pages.dart';
 import 'package:webview_flutter_platform_interface/webview_flutter_platform_interface.dart';
 
@@ -101,9 +100,9 @@ class AboutPage extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           const Text(
-                            "Github ：",
+                            "GitHub:",
                             style: TextStyle(fontSize: 18),
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                           GestureDetector(
                             child: const Text(
@@ -111,8 +110,7 @@ class AboutPage extends StatelessWidget {
                               textDirection: TextDirection.rtl,
                               style: TextStyle(
                                   decoration: TextDecoration.underline,
-                                  decorationStyle:
-                                  TextDecorationStyle.solid,
+                                  decorationStyle: TextDecorationStyle.solid,
                                   fontSize: 18,
                                   color: Colors.blue),
                             ),
@@ -122,8 +120,7 @@ class AboutPage extends StatelessWidget {
                                 MaterialPageRoute(
                                   builder: (context) => ArticleDetail(
                                       title: "gino_wanandroid",
-                                      url:
-                                      "https://github.com/answerDong/gino_wanandroid"),
+                                      url: "https://github.com/answerDong/gino_wanandroid"),
                                 ),
                               );
                             },
@@ -137,15 +134,15 @@ class AboutPage extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           const Text(
-                            "掘金 ：",
+                            "掘金:",
                             style: TextStyle(fontSize: 18),
-                            textDirection: TextDirection.rtl,
+                            textDirection: TextDirection.ltr,
                           ),
                           Expanded(
                             child: GestureDetector(
                               child: const Text(
                                 "https://juejin.cn/user/492173609147502",
-                                textDirection: TextDirection.rtl,
+                                textDirection: TextDirection.ltr,
                                 style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     decorationStyle:
@@ -155,14 +152,13 @@ class AboutPage extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                               ),
                               onTap: () {
-                                WebViewPlatform.instance = WebWebViewPlatform();
+                                // WebViewPlatform.instance = WebWebViewPlatform();
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ArticleDetail(
                                         title: "掘金：吉诺",
-                                        url:
-                                        "https://juejin.cn/user/492173609147502"),
+                                        url: "https://juejin.cn/user/492173609147502"),
                                   ),
                                 );
                               },
@@ -173,7 +169,7 @@ class AboutPage extends StatelessWidget {
                     ),
                     const Divider(),
                     const Padding(
-                      padding: EdgeInsets.all(10),
+                      padding: EdgeInsets.only( left: 10,right: 10,top: 10,bottom: 5),
                       child: Text(
                         "用到的库：",
                         style: TextStyle(fontSize: 16),
@@ -187,7 +183,7 @@ class AboutPage extends StatelessWidget {
                       itemBuilder: (BuildContext context, int position) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 30),
+                              vertical: 5, horizontal: 30),
                           child: Text(
                             _list[position].toString(),
                             style: const TextStyle(fontFamily: 'mononoki'),
