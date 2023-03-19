@@ -73,10 +73,7 @@ class AboutPage extends StatelessWidget {
             ],
             flexibleSpace: FlexibleSpaceBar(
               //background: Image.asset("images/a.jpg", fit: BoxFit.fill),
-              background: Image.network(
-                  "https://avatars3.githubusercontent.com/u/19725223?s=400&u=f399a2d73fd0445be63ee6bc1ea4a408a62454f5&v=4",
-                  fit: BoxFit.cover),
-            ),
+              background: Image.asset("lib/res/images/jsy01.jpg",fit: BoxFit.cover,),),
           ),
           SliverFixedExtentList(
             itemExtent: 800.0,

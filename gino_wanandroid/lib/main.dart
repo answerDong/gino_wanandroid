@@ -224,8 +224,7 @@ class _MyHomePageState extends State<MyHomePage> {
             trailing: Icon(Icons.chevron_right),
             onTap: () {
               Navigator.of(context).pop();
-              Share.share(
-                  '【玩安卓Flutter版】\nhttps://github.com/yechaoa/wanandroid_flutter');
+              Share.share('【玩安卓Flutter版】\nhttps://github.com/answerDong/gino_wanandroid');
             },
           ),
           ListTile(
@@ -370,10 +369,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: GinoColors.themeColor[position]["primaryColor"],
                     ),
                     onTap: () async {
+                      //没有实现，改成用provider比较懒，懒得弄了。之后使用get实现。
                       // Provide.value<ThemeProvide>(context).setTheme(position);
                       // //存储主题下标
-                      // SharedPreferences sp =
-                      //     await SharedPreferences.getInstance();
+                      // SharedPreferences sp = await SharedPreferences.getInstance();
                       // sp.setInt("themeIndex", position);
                       // Navigator.of(context).pop();
                     },

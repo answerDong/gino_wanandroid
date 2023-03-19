@@ -25,7 +25,7 @@ class HttpUitls {
 
     //添加配置  cookies管理  拦截器
     dio = Dio(options);
-    // dio.interceptors.add(CookieManager(CookieJar()));
+    dio.interceptors.add(CookieManager(CookieJar()));
     // dio.interceptors.add(InterceptorsWrapper(onRequest: (
     //   options,
     //   handler,
