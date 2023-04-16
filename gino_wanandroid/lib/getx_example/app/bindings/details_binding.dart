@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:getx_pattern/app/controller/details/details_controller.dart';
-import 'package:getx_pattern/app/data/provider/api.dart';
-import 'package:getx_pattern/app/data/repository/posts_repository.dart';
-import 'package:http/http.dart' as http;
+import 'package:gino_wanandroid/getx_example/app/controller/details_controller/details_controller.dart';
+import 'package:gino_wanandroid/getx_example/app/data/provider/api.dart';
+import 'package:gino_wanandroid/getx_example/app/data/repository/posts_repository.dart';
+
 
 class DetailsBinding implements Bindings{
   @override
@@ -10,7 +10,7 @@ class DetailsBinding implements Bindings{
     Get.lazyPut<DetailsController>(() {
       return DetailsController(
           repository:
-          MyRepository(apiClient: MyApiClient(httpClient: http.Client())));
+          MyRepository(apiClient: MyApiClient()));
     });
   }
 

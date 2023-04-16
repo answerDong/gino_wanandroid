@@ -1,7 +1,6 @@
-import 'package:getx_pattern/app/controller/home/home_controller.dart';
-import 'package:getx_pattern/app/data/provider/api.dart';
-import 'package:getx_pattern/app/data/repository/posts_repository.dart';
-import 'package:http/http.dart' as http;
+import 'package:gino_wanandroid/getx_example/app/controller/home_controller/home_controller.dart';
+import 'package:gino_wanandroid/getx_example/app/data/provider/api.dart';
+import 'package:gino_wanandroid/getx_example/app/data/repository/posts_repository.dart';
 import 'package:get/get.dart';
 
 class HomeBinding implements Bindings {
@@ -10,7 +9,7 @@ class HomeBinding implements Bindings {
     Get.lazyPut<HomeController>(() {
       return HomeController(
           repository:
-          MyRepository(apiClient: MyApiClient(httpClient: http.Client())));
+          MyRepository(apiClient: MyApiClient()));
     });
   }
 }

@@ -1,6 +1,6 @@
-import 'package:getx_pattern/app/translations/en_US/en_us_translations.dart';
-import 'package:getx_pattern/app/translations/es_MX/es_mx_translations.dart';
-import 'package:getx_pattern/app/translations/pt_BR/pt_br_translations.dart';
+import 'pt_BR/pt_br_translation.dart';
+import 'en_US/en_us_translation.dart';
+import 'es_MX/es_mx_translation.dart';
 
 abstract class AppTranslation {
   static Map<String, Map<String, String>>

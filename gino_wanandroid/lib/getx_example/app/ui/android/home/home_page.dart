@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gino_wanandroid/getx_example/app/controller/home_controller/home_controller.dart';
 
-import 'package:http/http.dart' as http;
 
 class HomePage extends GetView<HomeController> {
 //repository and controller  injection bindings
@@ -13,8 +12,8 @@ class HomePage extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(title: Text('HomePage')),
       body: Container(
-        child: GetX<MyController>(
-            initState: (state) { Get.find<MyController>().getAll() ;},
+        child: GetX<HomeController>(
+            initState: (state) { Get.find<HomeController>().getAll() ;},
             builder: (_) {
               return
                 _.postList.length < 1
