@@ -58,6 +58,9 @@ dependencies:
 #  webview_flutter_web: ^0.2.2+1
   webview_flutter_platform_interface: ^2.0.0
 
+  #https://pub.dev/packages/flutter_easyloading/install
+  flutter_easyloading: ^3.0.5
+
   get: ^4.6.5
 
 
