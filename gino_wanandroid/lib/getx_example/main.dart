@@ -2,10 +2,18 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:gino_wanandroid/getx_example/app/agetxexample/binding/binding_all.dart';
+import 'package:gino_wanandroid/getx_example/app/agetxexample/binding/page_getxbinding.dart';
+import 'package:gino_wanandroid/getx_example/app/agetxexample/dependency/page_dependecy.dart';
+import 'package:gino_wanandroid/getx_example/app/agetxexample/dependency/page_service.dart';
 import 'package:gino_wanandroid/getx_example/app/agetxexample/getcontroller/page_getcontrollerworkers.dart';
 import 'package:gino_wanandroid/getx_example/app/agetxexample/getcontroller/page_getxcontroller.dart';
 import 'package:gino_wanandroid/getx_example/app/agetxexample/getcontroller/page_getxcontrollerlifecycle.dart';
 import 'package:gino_wanandroid/getx_example/app/agetxexample/getcontroller/page_getxcontrolleruniqueid.dart';
+import 'package:gino_wanandroid/getx_example/app/agetxexample/getxutils/page_getxutils.dart';
+import 'package:gino_wanandroid/getx_example/app/agetxexample/getxwidget/page_getview.dart';
+import 'package:gino_wanandroid/getx_example/app/agetxexample/getxwidget/page_getwidget.dart';
+import 'package:gino_wanandroid/getx_example/app/agetxexample/internation/page_internationalization.dart';
 import 'package:gino_wanandroid/getx_example/app/agetxexample/obx_count.dart';
 import 'package:gino_wanandroid/getx_example/app/agetxexample/page_navigation.dart';
 import 'package:gino_wanandroid/getx_example/app/agetxexample/page_navigationhome.dart';
@@ -14,7 +22,26 @@ import 'package:gino_wanandroid/getx_example/app/agetxexample/widget_dialog.dart
 import 'package:gino_wanandroid/getx_example/app/agetxexample/widget_snackbar.dart';
 import 'package:gino_wanandroid/getx_example/app/ui/android/home/home_page.dart';
 
+import 'app/agetxexample/dependency/service.dart';
+import 'app/agetxexample/internation/message.dart';
 import 'app/agetxexample/page_navigationnameto.dart';
+
+// /// 初始化服务
+// Future<void> main() async {
+//   await initServices();
+//   runApp(
+//     GetMaterialApp(
+//       title: "GetxService",
+//       home: GetXServiceExample(),
+//     )
+//   );
+// }
+//
+// Future<void> initServices() async {
+//   print("初始化服务");
+//   await Get.putAsync(() async => await Service());
+//   print("所有服务启动");
+// }
 
 void main() {
   //判断是否是第一次启动
@@ -63,17 +90,55 @@ void main() {
      //    home: GetxObxCount(),
      //  )
      //Controller ui与控制解耦
-     GetMaterialApp(
-       title: "getx controller",
-       //示例
-       // home: GetXControllerExample(),
-       //init示例
-       // home: GetXControllerWorkersExample(),
-       //生命周期示例
-       // home: GetXControllerLifecycleMethodExample(),
-       //单独更新
-       home: GetXControllerUniqueIDExample(),
-     )
+     // GetMaterialApp(
+     //   title: "getx controller",
+     //   //示例
+     //   // home: GetXControllerExample(),
+     //   //init示例
+     //   // home: GetXControllerWorkersExample(),
+     //   //生命周期示例
+     //   // home: GetXControllerLifecycleMethodExample(),
+     //   //单独更新
+     //   home: GetXControllerUniqueIDExample(),
+     // )
+
+      //国际化配置
+    // GetMaterialApp(
+    //   title: "Getx国际化配置",
+    //   translations: Messages(),
+    //   locale: Locale('zh','CN'),
+    //   fallbackLocale: Locale("zh","CN"),
+    //   home: InternationalizationExample(),
+    // )
+
+    //依赖注入
+    // GetMaterialApp(
+    //   title: "Getx依赖注入",
+    //   home: DependecyInjectionExample(),
+    // )
+
+    //永久
+
+    //binding绑定
+    // GetMaterialApp(
+    //   title: "Getxbinding",
+    //   //将绑定的controller注入
+    //   initialBinding: AllControllerBinding(),
+    //   home: GetXBindingExample(),
+    // )
+
+    // //getxutils示例
+    // GetMaterialApp(
+    //   title: "GetxUtils示例",
+    //   home: GetXUtilsExample(),
+    // )
+
+    //getview示例 可以直接将controller注入
+    GetMaterialApp(
+      title: "getview示例",
+      // home: GetViewExample(),
+      home: GetWidgetExample(),
+    )
 
 
       // GetMaterialApp(
